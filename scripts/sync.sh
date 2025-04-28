@@ -16,8 +16,8 @@ IP="$1"
 case "$2" in
   install)
     echo "Syncing install script.  Local ---> server."
-    rsync -av ${LOCAL}/scripts/install.sh  ubuntu@${IP}:${REMOTE}/../
     rsync -av ${LOCAL}/roms ubuntu@${IP}:${REMOTE}/
+    rsync -av ${LOCAL}/scripts/install.sh  ubuntu@${IP}:${REMOTE}/../
     ;;
   
   code)
@@ -25,8 +25,8 @@ case "$2" in
     #rsync -av ${LOCAL_SF}/sample_factory/algo/learning/learner.py  ubuntu@${IP}:${REMOTE_SF}/sample_factory/algo/learning/
     #rsync -av ${LOCAL_SF}/sample_factory/envs/env_wrappers.py  ubuntu@${IP}:${REMOTE_SF}/sample_factory/envs/
     #rsync -av ${LOCAL_SF}/sample_factory/cfg/cfg.py  ubuntu@${IP}:${REMOTE_SF}/sample_factory/cfg/
-    #rsync -av ${LOCAL_SF}/sf_examples/retro  ubuntu@${IP}:${REMOTE_SF}/sf_examples/
-    #rsync -av ${LOCAL_SF}/stable-retro/retro/data/stable/KungFu-Nes/* ubuntu@${IP}:${REMOTE_SF}/stable-retro/retro/data/stable/KungFu-Nes/
+    rsync -av ${LOCAL}/sample-factory/sf_examples/retro  ubuntu@${IP}:${REMOTE}/sample-factory/sf_examples/
+    rsync -av ${LOCAL}/stable-retro/retro/data/stable/KungFu-Nes ubuntu@${IP}:${REMOTE}/stable-retro/retro/data/stable/
     rsync -av ${LOCAL}/scripts  ubuntu@${IP}:${REMOTE}/
     ;;
 

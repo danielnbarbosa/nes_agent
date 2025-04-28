@@ -24,10 +24,13 @@ case "$1" in
     do
         for FLOOR in {1..5}
         do
-            let "TRAIN_FOR_ENV_STEPS+=STEPS_DELTA" 
+            let "TRAIN_FOR_ENV_STEPS+=STEPS_DELTA"
+            echo "Starting train loop $i on floor $FLOOR"
             python -m sf_examples.retro.train_retro --algo=APPO --env=${ENV} --experiment="${ENV}_${EXPERIMENT_SUFFIX}" --state="1Player.Level${FLOOR}.state" \
               --device=cpu --with_wandb=True --wandb_project="${ENV}" --train_for_env_steps=${TRAIN_FOR_ENV_STEPS}
-            sleep 2  # let things settle before starting next run
+            echo "Finishing train loop $i on floor $FLOOR"
+            sleep 5  # let things settle before starting next run
+            echo "Finishing sleep loop $i on floor $FLOOR"
             #echo "${FLOOR} ${TRAIN_FOR_ENV_STEPS}"
         done
     done
@@ -39,7 +42,7 @@ case "$1" in
     do
         for FLOOR in {1..5}
         do
-            let "TRAIN_FOR_ENV_STEPS+=STEPS_DELTA" 
+            let "TRAIN_FOR_ENV_STEPS+=STEPS_DELTA"
             python -m sf_examples.retro.train_retro --algo=APPO --env=${ENV} --experiment="${ENV}_${EXPERIMENT_SUFFIX}" --state="1Player.Level${FLOOR}.state" \
               --device=gpu --with_wandb=True --wandb_project="${ENV}" --train_for_env_steps=${TRAIN_FOR_ENV_STEPS} --num_workers=60
             sleep 2  # let things settle before starting next run
