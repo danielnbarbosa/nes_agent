@@ -1,5 +1,5 @@
 Pipfile
 Pipfile.lock
-roms
+roms*
 sample-factory
 stable-retro

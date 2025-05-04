@@ -4,7 +4,7 @@
 # allows agent to gain experience deeper in the game more quickly
 # M1: 1M env steps in 6.5 min
 # A100: 10M env steps in 7.5 min
-# A100: 10M env steps in 6 min
+# A10: 10M env steps in 6 min
 
 # ./train_all_floors.sh cpu v100
 # ./train_all_floors.sh gpu v100_A10
