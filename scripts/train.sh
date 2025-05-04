@@ -2,21 +2,21 @@
 
 # use with tmux to preserve session
 
-# ./train.sh cpu v100 4
-# ./train.sh cputest
-# ./train.sh gputest
-# ./train.sh gpu v100 4
+# ./train.sh cpu DoubleDragon-Nes v100 1-1-1
+# ./train.sh cputest DoubleDragon-Nes
+# ./train.sh gputest DoubleDragon-Nes
+# ./train.sh gpu DoubleDragon-Nes v100 1-1-1
 
 
-ENV="KungFu-Nes"
 
-EXPERIMENT_SUFFIX="$2"  #  e.g. "v15_A100"
-FLOOR="$3"
+ENV="$2"  # e.g. DoubleDragon-Nes
+VERSION="$3"  #  e.g. v15_A100
+STAGE="$4"  # e.g. 1-1-1
 
 case "$1" in
   cpu)
-    cd ../sample-factory && python -m sf_examples.retro.train_retro --algo=APPO --env=${ENV} --experiment="${ENV}_${EXPERIMENT_SUFFIX}" \
-        --device=cpu --with_wandb=True --wandb_project="${ENV}" --state="1Player.Level${FLOOR}.state"
+    cd ../sample-factory && python -m sf_examples.retro.train_retro --algo=APPO --env=${ENV} --experiment="${ENV}_${VERSION}" \
+        --device=cpu --with_wandb=True --wandb_project="${ENV}" --state="Stage${STAGE}"
     ;;
 
   cputest)
@@ -25,8 +25,8 @@ case "$1" in
     ;;
 
   gpu)
-    cd ../sample-factory && python -m sf_examples.retro.train_retro --algo=APPO --env=${ENV} --experiment="${ENV}_${EXPERIMENT_SUFFIX}" \
-        --device=gpu --with_wandb=True --wandb_project="${ENV}" --num_workers=60 --state="1Player.Level${FLOOR}.state"
+    cd ../sample-factory && python -m sf_examples.retro.train_retro --algo=APPO --env=${ENV} --experiment="${ENV}_${VERSION}" \
+        --device=gpu --with_wandb=True --wandb_project="${ENV}" --num_workers=60 --state="Stage${STAGE}"
     ;;
 
   gputest)

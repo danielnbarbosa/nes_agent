@@ -2,28 +2,28 @@
 
 # watch agent, optionally save a video
 
-# ./enjoy.sh v28 best 1
-# ./enjoy.sh v28 best 1 save
+# ./enjoy_dd.sh DoubleDragon-Nes v28 best 1-1-1
+# ./enjoy_dd.sh DoubleDragon-Nes v28 best 1-1-1 save
+# ./enjoy_dd.sh DoubleDragon-Nes v28 best 1-1-1 norender
 
+LOCAL="/Users/daniel/src/github/danielnbarbosa/nes_agent"
 
-LOCAL_SF="/Users/daniel/src/github/danielnbarbosa/nes_agent/sample-factory"
-ENV="KungFu-Nes"
+ENV="$1"  # e.g. DoubleDragon-Nes
+VERSION="$2"  #  e.g. "v15_A100"
+CHECKPOINT="$3"  # latest or best
+STAGE="$4"
 
-EXPERIMENT_SUFFIX="$1"  #  e.g. "v15_A100"
-CHECKPOINT="$2"  # latest or best
-FLOOR="$3"
-
-case "$4" in
+case "$5" in
   save)
-    cd ../sample-factory && python -m sf_examples.retro.enjoy_retro --algo=APPO --env=${ENV} --experiment="${ENV}_${EXPERIMENT_SUFFIX}" \
-           --device=cpu  --load_checkpoint_kind=${CHECKPOINT} --train_dir=${LOCAL_SF}/train_dir --state="1Player.Level${FLOOR}.state" --save_video --max_num_episodes=1
+    cd ../sample-factory && python -m sf_examples.retro.enjoy_retro --algo=APPO --env=${ENV} --experiment="${ENV}_${VERSION}" \
+           --device=cpu  --load_checkpoint_kind=${CHECKPOINT} --train_dir=${LOCAL}/sample-factory/train_dir --state="Stage${STAGE}" --save_video --max_num_episodes=1
     ;;
   norender)
-    cd ../sample-factory && python -m sf_examples.retro.enjoy_retro --algo=APPO --env=${ENV} --experiment="${ENV}_${EXPERIMENT_SUFFIX}" \
-           --device=cpu  --load_checkpoint_kind=${CHECKPOINT} --train_dir=${LOCAL_SF}/train_dir --state="1Player.Level${FLOOR}.state" --no_render
+    cd ../sample-factory && python -m sf_examples.retro.enjoy_retro --algo=APPO --env=${ENV} --experiment="${ENV}_${VERSION}" \
+           --device=cpu  --load_checkpoint_kind=${CHECKPOINT} --train_dir=${LOCAL}/sample-factory/train_dir --state="Stage${STAGE}" --no_render
     ;;
   *)
-    cd ../sample-factory && python -m sf_examples.retro.enjoy_retro --algo=APPO --env=${ENV} --experiment="${ENV}_${EXPERIMENT_SUFFIX}" \
-           --device=cpu  --load_checkpoint_kind=${CHECKPOINT} --train_dir=${LOCAL_SF}/train_dir --state="1Player.Level${FLOOR}.state"
+    cd ../sample-factory && python -m sf_examples.retro.enjoy_retro --algo=APPO --env=${ENV} --experiment="${ENV}_${VERSION}" \
+           --device=cpu  --load_checkpoint_kind=${CHECKPOINT} --train_dir=${LOCAL}/sample-factory/train_dir --state="Stage${STAGE}"
     ;;
 esac
