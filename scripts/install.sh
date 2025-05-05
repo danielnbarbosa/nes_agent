@@ -42,6 +42,6 @@ echo "pipenv shell"
 echo "cd scripts"
 echo "wandb login"
 echo "tmux"
-echo "./train.sh gpu vXX 1"
+echo "./train.sh gpu DoubleDragon-Nes vXX 1-1-1"
 echo './sync.sh $IP logs  (on local)'
-echo "./enjoy.sh vXX_A10 best 1  (on local)"
+echo "./enjoy.sh DoubleDragon-Nes vXX_A10 best 1-1-1  (on local)"
