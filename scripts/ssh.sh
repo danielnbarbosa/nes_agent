@@ -1,10 +1,9 @@
 #!/bin/bash
 
 # ssh to server with heartbeat to keep connection alive
+# assumes USER and IP are exported in the terminal
 
-# ./ssh.sh 104.171.202.217
+# ./ssh.sh
 
 
-IP="$1"
-
-ssh -o ServerAliveInterval=60 -o ServerAliveCountMax=5 ubuntu@${IP}
+ssh -o ServerAliveInterval=60 -o ServerAliveCountMax=5 ${USER}@${IP}

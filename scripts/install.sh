@@ -5,10 +5,10 @@
 echo "Installing deps"
 echo "---------------"
 sudo apt update
-sudo apt install build-essential libssl-dev zlib1g-dev libbz2-dev \
+sudo DEBIAN_FRONTEND=noninteractive apt install build-essential libssl-dev zlib1g-dev libbz2-dev \
     libreadline-dev libsqlite3-dev curl git libncursesw5-dev xz-utils \
     tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev -y  # to build newer python
-sudo apt install python3-opengl xvfb -y  # for training using stable-retro
+sudo DEBIAN_FRONTEND=noninteractive apt install python3-opengl xvfb -y  # for training using stable-retro
 pip install pipx pipenv
 mkdir nes_agent
 cd nes_agent

@@ -2,9 +2,9 @@
 
 # watch agent, optionally save a video
 
-# ./enjoy_dd.sh DoubleDragon-Nes v28 best 1-1-1
-# ./enjoy_dd.sh DoubleDragon-Nes v28 best 1-1-1 save
-# ./enjoy_dd.sh DoubleDragon-Nes v28 best 1-1-1 norender
+# ./enjoy.sh DoubleDragon-Nes v28 best 1-1-1
+# ./enjoy.sh DoubleDragon-Nes v28 best 1-1-1 save
+# ./enjoy.sh DoubleDragon-Nes v28 best 1-1-1 norender
 
 LOCAL="/Users/daniel/src/github/danielnbarbosa/nes_agent"
 

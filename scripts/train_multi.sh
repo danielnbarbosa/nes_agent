@@ -23,7 +23,7 @@ then
     STAGES="1 2 3 4 5"
 elif [ $ENV == "DoubleDragon-Nes" ] 
 then
-    STAGES="1-1-1 1-1-2"
+    STAGES="1-1-1 2-1-1"
 fi
 
 case "$1" in
@@ -46,7 +46,7 @@ case "$1" in
   ;;
 
   gpu)
-    STEPS_DELTA=10000000
+    STEPS_DELTA=50000000
     for i in {1..10000}
     do
         for STAGE in $STAGES
