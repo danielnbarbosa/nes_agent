@@ -3,7 +3,7 @@
 # sync best model from the server and enjoy it
 # assumes USER and IP are exported in the terminal
 
-# ./sync_and_enjoy_best.sh v100_A10 1
+# ./enjoy_best.sh v100_A10 1
 
 
 LOCAL="/Users/daniel/src/github/danielnbarbosa/nes_agent"
