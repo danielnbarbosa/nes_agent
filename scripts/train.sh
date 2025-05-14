@@ -16,22 +16,22 @@ STAGE="$4"  # e.g. 1-1-1
 case "$1" in
   cpu)
     cd ../sample-factory && python -m sf_examples.retro.train_retro --algo=APPO --env=${ENV} --experiment="${ENV}_${VERSION}" \
-        --device=cpu --with_wandb=True --wandb_project="${ENV}" --state="Stage${STAGE}"
+        --device=cpu --with_wandb=True --wandb_project="${ENV}" --state="Stage${STAGE}" --mode="train"
     ;;
 
   cputest)
     cd ../sample-factory && python -m sf_examples.retro.train_retro --algo=APPO --env=${ENV} --experiment="${ENV}_test" \
-        --device=cpu --restart_behavior="overwrite"
+        --device=cpu --restart_behavior="overwrite" --mode="train" 
     ;;
 
   gpu)
     cd ../sample-factory && python -m sf_examples.retro.train_retro --algo=APPO --env=${ENV} --experiment="${ENV}_${VERSION}" \
-        --device=gpu --with_wandb=True --wandb_project="${ENV}" --num_workers=192 --state="Stage${STAGE}"
+        --device=gpu --with_wandb=True --wandb_project="${ENV}" --num_workers=192 --state="Stage${STAGE}" --mode="train"
     ;;
 
   gputest)
     cd ../sample-factory && python -m sf_examples.retro.train_retro --algo=APPO --env=${ENV} --experiment="${ENV}_test" \
-        --device=gpu --restart_behavior="overwrite" --num_workers=192
+        --device=gpu --restart_behavior="overwrite" --num_workers=192 --mode="train"
     ;;
 
   *)

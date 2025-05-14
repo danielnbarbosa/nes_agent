@@ -8,10 +8,11 @@
 # ./sync.sh logs
 
 LOCAL="/Users/daniel/src/github/danielnbarbosa/nes_agent"
-REMOTE="/home/${USER}/nes_agent"
+#REMOTE="/home/${USER}/nes_agent"
+REMOTE="/workspace/nes_agent"
 ENVS="KungFu-Nes DoubleDragon-Nes"
 
-REMOTE="/workspace/nes_agent"
+
 
 case "$1" in
   install)
@@ -22,9 +23,9 @@ case "$1" in
   
   code)
     echo "Syncing code.  Local ---> server."
-    #rsync -av ${LOCAL_SF}/sample_factory/algo/learning/learner.py  ${USER}@${IP}:${REMOTE_SF}/sample_factory/algo/learning/
-    #rsync -av ${LOCAL_SF}/sample_factory/envs/env_wrappers.py  ${USER}@${IP}:${REMOTE_SF}/sample_factory/envs/
-    #rsync -av ${LOCAL_SF}/sample_factory/cfg/cfg.py  ${USER}@${IP}:${REMOTE_SF}/sample_factory/cfg/
+    #rsync -av -e "ssh -p $PORT" ${LOCAL}/sample-factory/sample_factory/algo/learning/learner.py  ${USER}@${IP}:${REMOTE}/sample-factory/sample_factory/algo/learning/
+    #rsync -av -e "ssh -p $PORT" ${LOCAL}/sample-factory/sample_factory/envs/env_wrappers.py  ${USER}@${IP}:${REMOTE}/sample-factory/sample_factory/envs/
+    rsync -av -e "ssh -p $PORT" ${LOCAL}/sample-factory/sample_factory/cfg/cfg.py  ${USER}@${IP}:${REMOTE}/sample-factory//sample_factory/cfg/
     rsync -av -e "ssh -p $PORT" ${LOCAL}/sample-factory/sf_examples/retro  ${USER}@${IP}:${REMOTE}/sample-factory/sf_examples/
     for ENV in $ENVS
     do

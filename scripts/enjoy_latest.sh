@@ -3,9 +3,11 @@
 # sync latest model from the server and enjoy it
 # assumes USER, IP and PORT are exported in the terminal
 
-# ./enjoy_latest.sh KungFu-Nes v100_A10 1
-# ./enjoy_latest.sh KungFu-Nes v100_A10 1 save
-# ./enjoy_latest.sh KungFu-Nes v100_A10 1 norender
+# ./enjoy_latest.sh DoubleDragon-Nes v28 1-1-1
+# ./enjoy_latest.sh DoubleDragon-Nes v28 1-1-1 save
+# ./enjoy_latest.sh DoubleDragon-Nes v28 1-1-1 norender
+# ./enjoy_latest.sh DoubleDragon-Nes v28 1-1-1 eval
+# ./enjoy_latest.sh DoubleDragon-Nes v28 1-1-1 log
 
 
 LOCAL="/Users/daniel/src/github/danielnbarbosa/nes_agent"
@@ -29,6 +31,14 @@ case "$4" in
   norender)
     cd ../sample-factory && python -m sf_examples.retro.enjoy_retro --algo=APPO --env=${ENV} --experiment="${ENV}_${VERSION}" \
         --device=cpu  --load_checkpoint_kind=latest --train_dir=${LOCAL}/sample-factory/train_dir --state="Stage${STAGE}.state" --no_render
+    ;;
+  eval)
+    cd ../sample-factory && python -m sf_examples.retro.enjoy_retro --algo=APPO --env=${ENV} --experiment="${ENV}_${VERSION}" \
+           --device=cpu  --load_checkpoint_kind=latest --train_dir=${LOCAL}/sample-factory/train_dir --state="Stage${STAGE}" --no_render --mode="eval"
+    ;;
+  log)
+    cd ../sample-factory && python -m sf_examples.retro.enjoy_retro --algo=APPO --env=${ENV} --experiment="${ENV}_${VERSION}" \
+           --device=cpu  --load_checkpoint_kind=latest --train_dir=${LOCAL}/sample-factory/train_dir --state="Stage${STAGE}" --mode="log"
     ;;
   *)
     cd ../sample-factory && python -m sf_examples.retro.enjoy_retro --algo=APPO --env=${ENV} --experiment="${ENV}_${VERSION}" \

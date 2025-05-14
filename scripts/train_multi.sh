@@ -36,7 +36,7 @@ case "$1" in
             let "TRAIN_FOR_ENV_STEPS+=STEPS_DELTA"
             echo "Starting train loop $i on stage $STAGE"
             python -m sf_examples.retro.train_retro --algo=APPO --env=${ENV} --experiment="${ENV}_${VERSION}" --state="Stage${STAGE}" \
-              --device=cpu --with_wandb=True --wandb_project="${ENV}" --train_for_env_steps=${TRAIN_FOR_ENV_STEPS}
+              --device=cpu --with_wandb=True --wandb_project="${ENV}" --train_for_env_steps=${TRAIN_FOR_ENV_STEPS} --mode="train"
             echo "Finished train loop $i on stage $STAGE"
             sleep 5  # let things settle before starting next run
             echo "Finished sleep loop $i on stage $STAGE"
@@ -53,7 +53,7 @@ case "$1" in
         do
             let "TRAIN_FOR_ENV_STEPS+=STEPS_DELTA"
             python -m sf_examples.retro.train_retro --algo=APPO --env=${ENV} --experiment="${ENV}_${VERSION}" --state="Stage${STAGE}" \
-              --device=gpu --with_wandb=True --wandb_project="${ENV}" --train_for_env_steps=${TRAIN_FOR_ENV_STEPS} --num_workers=60
+              --device=gpu --with_wandb=True --wandb_project="${ENV}" --train_for_env_steps=${TRAIN_FOR_ENV_STEPS} --num_workers=60 --mode="train"
             sleep 2  # let things settle before starting next run
             #echo "${STAGE} ${TRAIN_FOR_ENV_STEPS}"
         done
