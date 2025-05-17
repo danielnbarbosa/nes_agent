@@ -37,8 +37,9 @@ pipenv run python -m retro.import ../roms
 echo ""
 echo "Now run:"
 echo './sync.sh code  (on local)'
-echo "cd nes_agent/scripts"
-echo "wandb login"
+echo ""
+echo "cd nes_agent/scripts; wandb login"
 echo "./train.sh gpu DoubleDragon-Nes vXX 1-1-1"
+echo ""
 echo './sync.sh logs  (on local)'
 echo "./enjoy.sh DoubleDragon-Nes vXX_A10 best 1-1-1  (on local)"

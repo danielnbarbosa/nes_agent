@@ -9,9 +9,9 @@
 
 
 
-ENV="$2"  # e.g. DoubleDragon-Nes
-VERSION="$3"  #  e.g. v15_A100
-STAGE="$4"  # e.g. 1-1-1
+ENV="$2"
+VERSION="$3"
+STAGE="$4"
 
 case "$1" in
   cpu)

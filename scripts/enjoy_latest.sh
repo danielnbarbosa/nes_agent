@@ -19,7 +19,13 @@ VERSION="$2"
 STAGE="$3"
 
 echo "Syncing latest results.   Server ---> local."
-rsync -av -e "ssh -p ${PORT}" ${USER}@${IP}:${REMOTE}/sample-factory/train_dir/${ENV}_${VERSION}/checkpoint_p0/checkpoint*.pth ${LOCAL}/sample-factory/train_dir/${ENV}_${VERSION}/checkpoint_p0/
+#rsync -av -e "ssh -p ${PORT}" ${USER}@${IP}:${REMOTE}/sample-factory/train_dir/${ENV}_${VERSION}/checkpoint_p0/checkpoint*.pth ${LOCAL}/sample-factory/train_dir/${ENV}_${VERSION}/checkpoint_p0/
+
+rsync -av -e "ssh -o ControlPath=/tmp/ssh-%r@%h:%p -p ${PORT}" "${USER}@${IP}:${REMOTE}/sample-factory/train_dir/${ENV}_${VERSION}/*.*" "${LOCAL}/sample-factory/train_dir/${ENV}_${VERSION}/"
+
+LATEST_FILE=$(ssh -o ControlPath=/tmp/ssh-%r@%h:%p -p ${PORT} ${USER}@${IP} "ls -t ${REMOTE}/sample-factory/train_dir/${ENV}_${VERSION}/checkpoint_p0/checkpoint*.pth | head -n 1")
+rsync -av -e "ssh -o ControlPath=/tmp/ssh-%r@%h:%p -p ${PORT}" "${USER}@${IP}:${LATEST_FILE}" "${LOCAL}/sample-factory/train_dir/${ENV}_${VERSION}/checkpoint_p0/"
+
 
 
 

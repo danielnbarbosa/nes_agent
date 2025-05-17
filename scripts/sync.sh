@@ -25,18 +25,18 @@ case "$1" in
     echo "Syncing code.  Local ---> server."
     #rsync -av -e "ssh -p $PORT" ${LOCAL}/sample-factory/sample_factory/algo/learning/learner.py  ${USER}@${IP}:${REMOTE}/sample-factory/sample_factory/algo/learning/
     #rsync -av -e "ssh -p $PORT" ${LOCAL}/sample-factory/sample_factory/envs/env_wrappers.py  ${USER}@${IP}:${REMOTE}/sample-factory/sample_factory/envs/
-    rsync -av -e "ssh -p $PORT" ${LOCAL}/sample-factory/sample_factory/cfg/cfg.py  ${USER}@${IP}:${REMOTE}/sample-factory//sample_factory/cfg/
-    rsync -av -e "ssh -p $PORT" ${LOCAL}/sample-factory/sf_examples/retro  ${USER}@${IP}:${REMOTE}/sample-factory/sf_examples/
+    #rsync -av -e "ssh -p $PORT" ${LOCAL}/sample-factory/sample_factory/cfg/cfg.py  ${USER}@${IP}:${REMOTE}/sample-factory//sample_factory/cfg/
+    rsync -av -e "ssh -p $PORT -o ControlPath=/tmp/ssh-%r@%h:%p" ${LOCAL}/sample-factory/sf_examples/retro  ${USER}@${IP}:${REMOTE}/sample-factory/sf_examples/
     for ENV in $ENVS
     do
-      rsync -av -e "ssh -p $PORT" ${LOCAL}/stable-retro/retro/data/stable/$ENV ${USER}@${IP}:${REMOTE}/stable-retro/retro/data/stable/
+      rsync -av -e "ssh -p $PORT -o ControlPath=/tmp/ssh-%r@%h:%p" ${LOCAL}/stable-retro/retro/data/stable/$ENV ${USER}@${IP}:${REMOTE}/stable-retro/retro/data/stable/
     done
-    rsync -av -e "ssh -p $PORT" ${LOCAL}/scripts  ${USER}@${IP}:${REMOTE}/
+    rsync -av -e "ssh -p $PORT -o ControlPath=/tmp/ssh-%r@%h:%p" ${LOCAL}/scripts  ${USER}@${IP}:${REMOTE}/
     ;;
 
   logs)
     echo "Syncing training logs and results.   Server ---> local."
-    rsync -av -e "ssh -p $PORT" ${USER}@${IP}:${REMOTE}/sample-factory/train_dir ${LOCAL}/sample-factory/
+    rsync -av -e "ssh -p $PORT -o ControlPath=/tmp/ssh-%r@%h:%p" ${USER}@${IP}:${REMOTE}/sample-factory/train_dir ${LOCAL}/sample-factory/
     ;;
 
   *)

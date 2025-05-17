@@ -12,7 +12,7 @@
 ENV="DoubleDragon-Nes"
 TRAIN_FOR_ENV_STEPS=0
 
-VERSION="$2"  #  e.g. "v15_A100"
+VERSION="$2"
 
 cd ../sample-factory
 
