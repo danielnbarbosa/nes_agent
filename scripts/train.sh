@@ -2,11 +2,11 @@
 
 # use with tmux to preserve session
 
-# ./train.sh cpu DoubleDragon-Nes v100 1-1-1
-# ./train.sh cputest DoubleDragon-Nes
-# ./train.sh gputest DoubleDragon-Nes
-# ./train.sh gpu DoubleDragon-Nes v100 1-1-1
-
+# ./train.sh gpu SuperMarioBros-Nes v10 1-1
+# ./train.sh cpu SuperMarioBros-Nes v10 1-1
+#
+# ./train.sh gputest SuperMarioBros-Nes
+# ./train.sh cputest SuperMarioBros-Nes
 
 
 ENV="$2"

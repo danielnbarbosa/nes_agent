@@ -9,7 +9,7 @@
 
 LOCAL="/Users/daniel/src/github/danielnbarbosa/nes_agent"
 REMOTE="/workspace/nes_agent"
-ENVS="KungFu-Nes DoubleDragon-Nes"
+ENVS="KungFu-Nes DoubleDragon-Nes SuperMarioBros-Nes"
 
 
 echo "Syncing code.  Local ---> server."

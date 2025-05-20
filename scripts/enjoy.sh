@@ -3,11 +3,9 @@
 # sync latest model from the server and enjoy it
 # assumes USER, IP and PORT are exported in the terminal
 
-# ./enjoy_latest.sh DoubleDragon-Nes v28 1-1-1
-# ./enjoy_latest.sh DoubleDragon-Nes v28 1-1-1 save
-# ./enjoy_latest.sh DoubleDragon-Nes v28 1-1-1 norender
-# ./enjoy_latest.sh DoubleDragon-Nes v28 1-1-1 eval
-# ./enjoy_latest.sh DoubleDragon-Nes v28 1-1-1 log
+# ./enjoy.sh SuperMarioBros-Nes v10 1-1 log
+# ./enjoy.sh SuperMarioBros-Nes v10 1-1 log-sync
+# ./enjoy.sh SuperMarioBros-Nes v10 1-1 eval
 
 
 LOCAL="/Users/daniel/src/github/danielnbarbosa/nes_agent"
@@ -42,9 +40,11 @@ case "$4" in
     cd ../sample-factory && python -m sf_examples.retro.enjoy_retro --algo=APPO --env=${ENV} --experiment="${ENV}_${VERSION}" \
     --device=cpu  --load_checkpoint_kind=latest --train_dir=${LOCAL}/sample-factory/train_dir --state="Stage${STAGE}" --mode="eval" --no_render
     ;;
+  movie)
+    cd ../sample-factory && python -m sf_examples.retro.enjoy_retro --algo=APPO --env=${ENV} --experiment="${ENV}_${VERSION}" \
+    --device=cpu  --load_checkpoint_kind=latest --train_dir=${LOCAL}/sample-factory/train_dir --state="Stage${STAGE}" --mode="eval" --no_render --save_video --max_num_episodes=1
+    ;;
   *)
     echo "Invalid option.  Valid options are: log, log-sync, eval."
     ;;
 esac
-
-

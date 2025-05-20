@@ -17,7 +17,7 @@ ssh -MNf -o ControlMaster=yes -o ControlPath=/tmp/ssh-%r@%h:%p -o StrictHostKeyC
 # sync install script
 echo "Syncing install script.  Local ---> server."
 rsync -av -e "ssh -p ${PORT} -o ControlPath=/tmp/ssh-%r@%h:%p" ${LOCAL}/roms ${USER}@${IP}:${REMOTE}/
-rsync -av -e "ssh -p ${PORT}-o ControlPath=/tmp/ssh-%r@%h:%p" ${LOCAL}/scripts/install.sh  ${USER}@${IP}:${REMOTE}/../
+rsync -av -e "ssh -p ${PORT} -o ControlPath=/tmp/ssh-%r@%h:%p" ${LOCAL}/scripts/install.sh  ${USER}@${IP}:${REMOTE}/../
 
 # ssh as usual
 ssh -o StrictHostKeyChecking=no -o ServerAliveInterval=60 -o ServerAliveCountMax=5 -p ${PORT} ${USER}@${IP}
