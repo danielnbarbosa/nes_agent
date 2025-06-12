@@ -21,7 +21,9 @@ sync () {
 echo "Syncing latest checkpoint.   Server ---> local."
 rsync -av -e "ssh -o ControlPath=/tmp/ssh-%r@%h:%p -p ${PORT}" "${USER}@${IP}:${REMOTE}/sample-factory/train_dir/${ENV}_${VERSION}/*.*" "${LOCAL}/sample-factory/train_dir/${ENV}_${VERSION}/"
 LATEST_FILE=$(ssh -o ControlPath=/tmp/ssh-%r@%h:%p -p ${PORT} ${USER}@${IP} "ls -t ${REMOTE}/sample-factory/train_dir/${ENV}_${VERSION}/checkpoint_p0/checkpoint*.pth | head -n 1")
-rsync -av -e "ssh -o ControlPath=/tmp/ssh-%r@%h:%p -p ${PORT}" "${USER}@${IP}:${LATEST_FILE}" "${LOCAL}/sample-factory/train_dir/${ENV}_${VERSION}/checkpoint_p0/"
+if [ ${#LATEST_FILE} -gt 0 ]; then
+    rsync -av -e "ssh -o ControlPath=/tmp/ssh-%r@%h:%p -p ${PORT}" "${USER}@${IP}:${LATEST_FILE}" "${LOCAL}/sample-factory/train_dir/${ENV}_${VERSION}/checkpoint_p0/"
+fi
 }
 
 
@@ -38,7 +40,16 @@ case "$4" in
   eval)
     sync
     cd ../sample-factory && python -m sf_examples.retro.enjoy_retro --algo=APPO --env=${ENV} --experiment="${ENV}_${VERSION}" \
-    --device=cpu  --load_checkpoint_kind=latest --train_dir=${LOCAL}/sample-factory/train_dir --state="Stage${STAGE}" --mode="eval" --no_render
+    --device=cpu  --load_checkpoint_kind=latest --train_dir=${LOCAL}/sample-factory/train_dir --state="Stage${STAGE}" --mode="eval" --no_render --max_num_episodes=10
+    ;;
+  eval-cont)
+    for i in {1..500}
+    do
+      sync
+      cd ../sample-factory && python -m sf_examples.retro.enjoy_retro --algo=APPO --env=${ENV} --experiment="${ENV}_${VERSION}" \
+      --device=cpu  --load_checkpoint_kind=latest --train_dir=${LOCAL}/sample-factory/train_dir --state="Stage${STAGE}" --mode="eval" --no_render --max_num_episodes=10
+      sleep 90
+    done
     ;;
   movie)
     cd ../sample-factory && python -m sf_examples.retro.enjoy_retro --algo=APPO --env=${ENV} --experiment="${ENV}_${VERSION}" \
