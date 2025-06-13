@@ -48,7 +48,7 @@ case "$4" in
       sync
       cd ../sample-factory && python -m sf_examples.retro.enjoy_retro --algo=APPO --env=${ENV} --experiment="${ENV}_${VERSION}" \
       --device=cpu  --load_checkpoint_kind=latest --train_dir=${LOCAL}/sample-factory/train_dir --state="Stage${STAGE}" --mode="eval" --no_render --max_num_episodes=10
-      sleep 90
+      sleep 75
     done
     ;;
   movie)
