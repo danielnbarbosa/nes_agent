@@ -56,6 +56,6 @@ case "$4" in
     --device=cpu  --load_checkpoint_kind=latest --train_dir=${LOCAL}/sample-factory/train_dir --state="Stage${STAGE}" --mode="eval" --no_render --save_video --max_num_episodes=1
     ;;
   *)
-    echo "Invalid option.  Valid options are: log, log-sync, eval."
+    echo "Invalid option.  Valid options are: log, log-sync, eval, eval-cont, movie."
     ;;
 esac
