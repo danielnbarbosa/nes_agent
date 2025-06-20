@@ -21,7 +21,7 @@ case "$1" in
 
   cputest)
     cd ../sample-factory && python -m sf_examples.retro.train_retro --algo=APPO --env=${ENV} --experiment="${ENV}_test" \
-        --device=cpu --restart_behavior="overwrite" --mode="train"
+        --device=cpu --restart_behavior="overwrite" --num_workers=1 --mode="train"
     ;;
 
   gpu)
