@@ -9,7 +9,7 @@
 # ./train_multi.sh gpu v100_A10
 
 
-ENV="DoubleDragon-Nes"
+ENV="SuperMarioBros-Nes"
 TRAIN_FOR_ENV_STEPS=0
 
 VERSION="$2"
@@ -24,6 +24,9 @@ then
 elif [ $ENV == "DoubleDragon-Nes" ] 
 then
     STAGES="1-1-1 2-1-1"
+elif [ $ENV == "SuperMarioBros-Nes" ] 
+then
+    STAGES="1-1 1-2 1-3 1-4 2-1 2-2 2-3 2-4 3-1 3-2 3-3 3-4"
 fi
 
 case "$1" in
@@ -46,14 +49,15 @@ case "$1" in
   ;;
 
   gpu)
-    STEPS_DELTA=50000000
+    STEPS_DELTA=20000000
     for i in {1..10000}
     do
         for STAGE in $STAGES
         do
+            echo "Starting train loop $i on stage $STAGE"
             let "TRAIN_FOR_ENV_STEPS+=STEPS_DELTA"
             python -m sf_examples.retro.train_retro --algo=APPO --env=${ENV} --experiment="${ENV}_${VERSION}" --state="Stage${STAGE}" \
-              --device=gpu --with_wandb=True --wandb_project="${ENV}" --train_for_env_steps=${TRAIN_FOR_ENV_STEPS} --num_workers=60 --mode="train"
+              --device=gpu --with_wandb=True --wandb_project="${ENV}" --train_for_env_steps=${TRAIN_FOR_ENV_STEPS} --num_workers=192 --mode="train"
             sleep 2  # let things settle before starting next run
             #echo "${STAGE} ${TRAIN_FOR_ENV_STEPS}"
         done
