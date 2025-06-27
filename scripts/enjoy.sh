@@ -48,14 +48,34 @@ case "$4" in
       sync
       cd ../sample-factory && python -m sf_examples.retro.enjoy_retro --algo=APPO --env=${ENV} --experiment="${ENV}_${VERSION}" \
       --device=cpu  --load_checkpoint_kind=latest --train_dir=${LOCAL}/sample-factory/train_dir --state="Stage${STAGE}" --mode="eval" --no_render --max_num_episodes=10
-      sleep 30
+      sleep 1
+    done
+    ;;
+  eval-cont-movie)
+    for i in {1..500}
+    do
+      sync
+      cd ../sample-factory && python -m sf_examples.retro.enjoy_retro --algo=APPO --env=${ENV} --experiment="${ENV}_${VERSION}" \
+      --device=cpu  --load_checkpoint_kind=latest --train_dir=${LOCAL}/sample-factory/train_dir --state="Stage${STAGE}" --mode="eval" --no_render --max_num_episodes=10
+      VIDEO_NAME=$(tail -1000 ../sample-factory/train_dir/${ENV}_${VERSION}/sf_log.txt | grep Saving | tail -1 | awk -F'checkpoint_p0/' '{print $2}' | sed -e 's/.pth...//')
+      cd ../sample-factory && python -m sf_examples.retro.enjoy_retro --algo=APPO --env=${ENV} --experiment="${ENV}_${VERSION}" \
+      --device=cpu  --load_checkpoint_kind=latest --train_dir=${LOCAL}/sample-factory/train_dir --state="Stage${STAGE}" --mode="eval" --no_render --save_video --video_name=$VIDEO_NAME --max_num_episodes=1
+      sleep 1
     done
     ;;
   movie)
     cd ../sample-factory && python -m sf_examples.retro.enjoy_retro --algo=APPO --env=${ENV} --experiment="${ENV}_${VERSION}" \
     --device=cpu  --load_checkpoint_kind=latest --train_dir=${LOCAL}/sample-factory/train_dir --state="Stage${STAGE}" --mode="eval" --no_render --save_video --max_num_episodes=1
     ;;
+  movies)
+    for i in {1..500}
+    do
+      cd ../sample-factory && python -m sf_examples.retro.enjoy_retro --algo=APPO --env=${ENV} --experiment="${ENV}_${VERSION}" \
+    --device=cpu  --load_checkpoint_kind=latest --train_dir=${LOCAL}/sample-factory/train_dir --state="Stage${STAGE}" --mode="eval" --no_render --save_video --video_name=movie_${i} --max_num_episodes=1
+      sleep 1
+    done
+    ;;
   *)
-    echo "Invalid option.  Valid options are: log, log-sync, eval, eval-cont, movie."
+    echo "Invalid option.  Valid options are: log, log-sync, eval, eval-cont, eval-cont-movie, movie, movies."
     ;;
 esac
