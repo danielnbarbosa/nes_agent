@@ -22,7 +22,7 @@ echo "Syncing latest checkpoint.   Server ---> local."
 rsync -av -e "ssh -o ControlPath=/tmp/ssh-%r@%h:%p -p ${PORT}" "${USER}@${IP}:${REMOTE}/sample-factory/train_dir/${ENV}_${VERSION}/*.*" "${LOCAL}/sample-factory/train_dir/${ENV}_${VERSION}/"
 LATEST_FILE=$(ssh -o ControlPath=/tmp/ssh-%r@%h:%p -p ${PORT} ${USER}@${IP} "ls -t ${REMOTE}/sample-factory/train_dir/${ENV}_${VERSION}/checkpoint_p0/checkpoint*.pth | head -n 1")
 if [ ${#LATEST_FILE} -gt 0 ]; then
-    rsync -av -e "ssh -o ControlPath=/tmp/ssh-%r@%h:%p -p ${PORT}" "${USER}@${IP}:${LATEST_FILE}" "${LOCAL}/sample-factory/train_dir/${ENV}_${VERSION}/checkpoint_p0/"
+    rsync -av --progress -e "ssh -o ControlPath=/tmp/ssh-%r@%h:%p -p ${PORT}" "${USER}@${IP}:${LATEST_FILE}" "${LOCAL}/sample-factory/train_dir/${ENV}_${VERSION}/checkpoint_p0/"
 fi
 }
 

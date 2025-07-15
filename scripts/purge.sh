@@ -5,7 +5,7 @@
 
 cd ../sample-factory/train_dir/
 
-DIRS=$(ls -d SuperMarioBros-Nes_v27*)
+DIRS=$(ls -d SuperMarioBros-Nes_v395)
 for DIR in $DIRS
 do
   echo "Purging $DIR"
