@@ -9,16 +9,16 @@ Using reinforcement learning to beat old NES games.  Uses [sample-factory](https
 
 
 ### Kung Fu
-Model was trained for 600 million frames after which it can beat the game 7 times over.  [Reward function](https://github.com/danielnbarbosa/stable-retro/blob/master/retro/data/stable/KungFu-Nes/script.lua) is pretty generic.  The [video](https://github.com/danielnbarbosa/nes_agent/blob/main/assets/kung-fu/finished_the_game_clean.mp4) is from a slightly older model, not the best one.
+Model was trained for 600 million frames after which it can beat the game 7 times over.  [Reward function](https://github.com/danielnbarbosa/stable-retro/blob/master/retro/data/stable/KungFu-Nes/script.lua) is pretty generic.
 
 
 ### Double Dragon
-Model was trained for around 1.2 billion frames.  Can get halfway through Mission 3.  After that I gave up as the [reward function](https://github.com/danielnbarbosa/stable-retro/blob/master/retro/data/stable/DoubleDragon-Nes/script.lua) was getting ridiculously hacky.  Here's the [video](https://github.com/danielnbarbosa/nes_agent/blob/main/assets/double-dragon/from_stage_1-1-1_to_3_1_5.mp4).
+Model was trained for around 1.2 billion frames.  Can get halfway through Mission 3.  After that I gave up as the [reward function](https://github.com/danielnbarbosa/stable-retro/blob/master/retro/data/stable/DoubleDragon-Nes/script.lua) was getting ridiculously hacky.
 
 
 ### Super Mario Bros
 
-Model was trained for 4 billion frames.  Evaluation is done using a single model and a single reward function with 3 lives.  It was necessary to use some hacky hand guidance in the [reward function](https://github.com/danielnbarbosa/stable-retro/blob/master/retro/data/stable/SuperMarioBros-Nes/script.lua), especially on the castle maze levels (4-4, 7-4 and 8-4).  Definitely room for improvement here.  Here's the [video](https://github.com/danielnbarbosa/nes_agent/blob/main/assets/super-mario-bros/1-1_to_end.mp4) showing the successful eval run.
+Model was trained for 4 billion frames.  Evaluation is done using a single model and a single reward function with 3 lives.  It was necessary to use some hacky hand guidance in the [reward function](https://github.com/danielnbarbosa/stable-retro/blob/master/retro/data/stable/SuperMarioBros-Nes/script.lua), especially on the castle maze levels (4-4, 7-4 and 8-4).  Definitely room for improvement here.  Watch the [video](https://www.youtube.com/watch?v=dbUaV5uOli8).
 
 
 
